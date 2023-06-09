@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./TestCSS01.css" />
+    <title>TestCss01</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h2>Everyone's photos</h2>
+        <h2>View all 2,724,700</h2>
+      </div>
+
+      <div class="picturebox">
+        <div class="image-wrapper">
+          <img src="" />
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.addEventListener("DOMContentLoaded", async function () {
+        const fetchPictures = async () => {
+          const res = await fetch("https://picsum.photos/v2/list");
+          const pictureData = await res.json();
+          console.log("pictureData:", pictureData);
+
+          const picturebox = document.querySelector(".picturebox");
+          pictureData.map(picture => {
+            const imageWrapper = document.createElement("div");
+            imageWrapper.className = "image-wrapper";
+
+            const image = document.createElement("img");
+            image.src = picture.download_url;
+
+            imageWrapper.appendChild(image);
+            picturebox.appendChild(imageWrapper);
+          });
+        };
+
+        fetchPictures();
+      });
+    </script>
+  </body>
+</html>
